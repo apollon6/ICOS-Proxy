@@ -10,7 +10,10 @@ const app = new Hono();
 /** 認証設定 */
 app.use("*", oidcAuthMiddleware());
 /** ログ設定 */
-const logger = new Logger({ type: "pretty" });
+const logger = new Logger({
+  type: "pretty",
+  hideLogPositionForProduction: true,
+});
 app.use("*", async (c, next) => {
   const auth = await getAuth(c);
   logger.info(auth?.email, c.req.method, c.req.path);
