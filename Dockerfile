@@ -2,7 +2,7 @@ FROM oven/bun:1.2.14
 
 WORKDIR /app
 
-COPY bun.lockb package.json tsconfig.json ./
+COPY bun.lock package.json tsconfig.json ./
 
 RUN bun install --frozen-lockfile
 
