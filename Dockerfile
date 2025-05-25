@@ -8,4 +8,4 @@ RUN bun install --frozen-lockfile
 
 COPY . .
 
-CMD ["bun", "run", "src/app.ts"]
+CMD ["bun", "run", "src/index.ts"]
