@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { getConnInfo } from "hono/bun";
 import { oidcAuthMiddleware, getAuth } from "@hono/oidc-auth";
 import * as mime from "mime-types";
 import { Logger } from "tslog";
@@ -13,7 +14,12 @@ app.use("*", oidcAuthMiddleware());
 const logger = new Logger({ type: "pretty" });
 app.use("*", async (c, next) => {
   const auth = await getAuth(c);
-  logger.info(auth?.email, c.req.method, c.req.path);
+  logger.info(
+    auth?.email,
+    c.req.method,
+    c.req.path,
+    getConnInfo(c).remote.address
+  );
   await next();
 });
 
